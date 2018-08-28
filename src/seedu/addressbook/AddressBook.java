@@ -71,6 +71,7 @@ public class AddressBook {
     private static final String MESSAGE_COMMAND_HELP_PARAMETERS = "\tParameters: %1$s";
     private static final String MESSAGE_COMMAND_HELP_EXAMPLE = "\tExample: %1$s";
     private static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    private static final String MESSAGE_SEARCH_PERSON_SUCCESS = "Found: %1$s";
     private static final String MESSAGE_DISPLAY_PERSON_DATA = "%1$s  Phone Number: %2$s  Email: %3$s";
     private static final String MESSAGE_DISPLAY_LIST_ELEMENT_INDEX = "%1$d. ";
     private static final String MESSAGE_GOODBYE = "Exiting Address Book... Good bye!";
@@ -132,6 +133,11 @@ public class AddressBook {
     private static final String COMMAND_EXIT_WORD = "exit";
     private static final String COMMAND_EXIT_DESC = "Exits the program.";
     private static final String COMMAND_EXIT_EXAMPLE = COMMAND_EXIT_WORD;
+
+    private static final String COMMAND_SEARCH_WORD ="search";
+    private static final String COMMAND_SEARCH_DESC = "Searches a person identified by the index number used in " + "the last find/list call.";
+    private static final String COMMAND_SEARCH_PARAMETER = "INDEX";
+    private static final String COMMAND_SEARCH_EXAMPLE = "search" + " 1";
 
     private static final String DIVIDER = "===================================================";
 
@@ -369,6 +375,8 @@ public class AddressBook {
         final String commandType = commandTypeAndParams[0];
         final String commandArgs = commandTypeAndParams[1];
         switch (commandType) {
+            case COMMAND_SEARCH_WORD:
+                return executeSearch(commandArgs);
         case COMMAND_ADD_WORD:
             return executeAddPerson(commandArgs);
         case COMMAND_FIND_WORD:
@@ -383,6 +391,7 @@ public class AddressBook {
             return getUsageInfoForAllCommands();
         case COMMAND_EXIT_WORD:
             executeExitProgramRequest();
+
         default:
             return getMessageForInvalidCommandInput(commandType, getUsageInfoForAllCommands());
         }
@@ -493,6 +502,17 @@ public class AddressBook {
         return matchedPersons;
     }
 
+    private static String executeSearch(String commandArgs) {
+        if (!isDeletePersonArgsValid(commandArgs)) {
+            return getMessageForInvalidCommandInput(COMMAND_SEARCH_WORD, getUsageInfoForSearchCommand());
+        }
+        final int targetVisibleIndex = extractTargetIndexFromDeletePersonArgs(commandArgs);
+        if (!isDisplayIndexValidForLastPersonListingView(targetVisibleIndex)) {
+            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        }
+        final String[] targetInModel = getPersonByLastVisibleIndex(targetVisibleIndex);
+        return String.format(MESSAGE_SEARCH_PERSON_SUCCESS, getMessageForFormattedPersonData(targetInModel));
+    }
     /**
      * Deletes person identified using last displayed index.
      *
@@ -1123,6 +1143,11 @@ public class AddressBook {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_DELETE_WORD, COMMAND_DELETE_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_PARAMETERS, COMMAND_DELETE_PARAMETER) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_DELETE_EXAMPLE) + LS;
+    }
+    private static String getUsageInfoForSearchCommand() {
+        return String.format(MESSAGE_COMMAND_HELP, COMMAND_SEARCH_WORD, COMMAND_SEARCH_DESC) + LS
+                + String.format(MESSAGE_COMMAND_HELP_PARAMETERS, COMMAND_SEARCH_PARAMETER) + LS
+                + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_SEARCH_EXAMPLE) + LS;
     }
 
     /** Returns string for showing 'clear' command usage instruction */
