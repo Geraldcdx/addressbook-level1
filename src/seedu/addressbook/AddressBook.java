@@ -503,13 +503,25 @@ public class AddressBook {
         if (!isDeletePersonArgsValid(commandArgs)) {
             return getMessageForInvalidCommandInput(COMMAND_DELETE_WORD, getUsageInfoForDeleteCommand());
         }
-        final int targetVisibleIndex = extractTargetIndexFromDeletePersonArgs(commandArgs);
+ final int targetVisibleIndex = extractTargetIndexFromDeletePersonArgs(commandArgs);
         if (!isDisplayIndexValidForLastPersonListingView(targetVisibleIndex)) {
             return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         }
         final String[] targetInModel = getPersonByLastVisibleIndex(targetVisibleIndex);
         return deletePersonFromAddressBook(targetInModel) ? getMessageForSuccessfulDelete(targetInModel) // success
                                                           : MESSAGE_PERSON_NOT_IN_ADDRESSBOOK; // not found
+//    String[] commandArg=commandArgs.split("");
+//        for(String[] names:ALL_PERSONS) {
+//            //String namestr=Arrays.toString(names);
+//            System.out.println(names[0]);
+//            System.out.println(commandArgs);
+//        if (commandArgs=="Gerald"){
+//            System.out.println("Here");
+//            deletePersonFromAddressBook(commandArg);
+//            return getMessageForSuccessfulDelete(commandArg);
+//        }
+//    }
+//        return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
     }
 
     /**
@@ -536,6 +548,7 @@ public class AddressBook {
     private static int extractTargetIndexFromDeletePersonArgs(String rawArgs) {
         return Integer.parseInt(rawArgs.trim());
     }
+
 
     /**
      * Checks that the given index is within bounds and valid for the last shown person list view.
@@ -586,12 +599,6 @@ public class AddressBook {
         exitProgram();
     }
 
-    /*
-     * ===========================================
-     *               UI LOGIC
-     * ===========================================
-     */
-
     /**
      * Prompts for the command and reads the text entered by the user.
      * Ignores lines with first non-whitespace char equal to {@link #INPUT_COMMENT_MARKER} (considered comments)
@@ -607,6 +614,12 @@ public class AddressBook {
         }
         return inputLine;
     }
+
+    /*
+     * ===========================================
+     *               UI LOGIC
+     * ===========================================
+     */
 
    /*
     * NOTE : =============================================================
