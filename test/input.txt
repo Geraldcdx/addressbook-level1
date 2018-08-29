@@ -94,8 +94,10 @@
 # test search command
 ##########################################################
 
-  # searches at index 1
+  # searches at index 1,50 and 0
   search 1
+  search 50
+  search 0
 
 ##########################################################
 # test clear command
