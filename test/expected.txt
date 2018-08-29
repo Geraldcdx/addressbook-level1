@@ -268,6 +268,10 @@
 || 
 || 2 persons found!
 || ===================================================
+|| Enter command: search 1
+|| [Command entered:search 1]
+|| Found: Betsy Choo  Phone Number: 222222  Email: benchoo@nus.edu.sg
+|| ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
 || ===================================================

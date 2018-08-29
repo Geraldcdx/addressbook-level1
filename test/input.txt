@@ -90,6 +90,12 @@
   # listing indexes get updated on next request
   delete 1
   list
+##########################################################
+# test search command
+##########################################################
+
+  # searches at index 1
+  search 1
 
 ##########################################################
 # test clear command
