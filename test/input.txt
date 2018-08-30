@@ -94,9 +94,11 @@
 # test search command
 ##########################################################
 
-  # searches at index 1,50 and 0
+  # searches at index 1
   search 1
+  # searches at index 50 which does not exist
   search 50
+  # searches a non-valid index
   search 0
 
 ##########################################################

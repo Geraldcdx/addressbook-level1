@@ -268,21 +268,18 @@
 || 
 || 2 persons found!
 || ===================================================
-|| Enter command: search 1
-|| [Command entered:search 1]
+|| Enter command: || [Command entered:  search 1]
 || Found: Betsy Choo  Phone Number: 222222  Email: benchoo@nus.edu.sg
 || ===================================================
-|| Enter command: search 50
-|| [Command entered:search 50]
+|| Enter command: || [Command entered:  search 50]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: search 0
-|| [Command entered:search 0]
-|| Invalid command format: search
+|| Enter command: || [Command entered:  search 0]
+|| Invalid command format: search 
 || search: Searches a person identified by the index number used in the last find/list call.
 || 	Parameters: INDEX
 || 	Example: search 1
-||
+|| 
 || ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
